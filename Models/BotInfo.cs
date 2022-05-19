@@ -18,9 +18,9 @@ public class BotInfo
 	public string username { get; set; }
 	public DateTime date { get; set; }
 	public int server_count { get; set; }
-	public int shard_count { get; set; }
+	public int? shard_count { get; set; }
 	public List<string> guilds { get; set; }
-	public List<int> shards { get; set; }
+	public List<int>? shards { get; set; }
 	public int monthlyPoints { get; set; }
 	public int points { get; set; }
 	public bool certifiedBot { get; set; }

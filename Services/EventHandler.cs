@@ -113,6 +113,7 @@ public class RotationHandler
 
 			await message.ModifyAsync(x =>
 			{
+				x.Content = "";
 				x.Embed = builder.Build();
 				x.Components = components;
 			});
@@ -203,6 +204,7 @@ public class RotationHandler
 
 			await message.ModifyAsync(x =>
 			{
+				x.Content = "";
 				x.Embed = builder.Build();
 				x.Components = components;
 			});

@@ -35,7 +35,7 @@ namespace DNetBotHighlight.Services
 				// Process the InteractionCreated payloads to execute Interactions commands
 				//Log.Debug("[Interactions] Registering event handlers...");
 				_client.InteractionCreated += HandleInteraction;
-				//_client.MessageReceived += HandleMessage; //Only used to create database file. Disable after setup.
+				//_client.MessageReceived += HandleMessage; //Only used for setup. Disable after setup.
 
 				// Process the command execution results 
 				_commands.SlashCommandExecuted += SlashCommandExecuted;
@@ -77,6 +77,26 @@ namespace DNetBotHighlight.Services
 					var context = new SocketCommandContext(_client, (SocketUserMessage) msg);
 					await context.Channel.SendMessageAsync($"Weekly highlight position");
 					await context.Channel.SendMessageAsync($"Daily highlight position");
+				}
+				
+				if (msg.Author.Id == 173439637388263425 && msg.Content == ">clearmessages")
+				{
+					var message = await _client.GetGuild(848176216011046962).GetTextChannel(966174454801657877).GetMessageAsync(966175717488476170) as IUserMessage;
+					if (message == null) return;
+					await message.ModifyAsync(x =>
+					{
+						x.Content = "TBD";
+						x.Embed = null;
+						x.Components = null;
+					});
+					message = await _client.GetGuild(848176216011046962).GetTextChannel(966174454801657877).GetMessageAsync(966175716779626496) as IUserMessage;
+					if (message == null) return;
+					await message.ModifyAsync(x =>
+					{
+						x.Content = "TBD";
+						x.Embed = null;
+						x.Components = null;
+					});
 				}
 			}
 			catch (Exception ex)

@@ -26,15 +26,13 @@ public class RotationHandler
 
 		_dailyWorker = new BackgroundWorker();
 		_dailyWorker.DoWork += UpdateDailyHighlight;
-		var dailyTimer = new Timer(30000);
-		//var dailyTimer = new Timer(86400000);
+		var dailyTimer = new Timer(86400000);
 		dailyTimer.Elapsed += dailyTimer_Elapsed;
 		dailyTimer.Start();
 
 		_weeklyWorker = new BackgroundWorker();
 		_weeklyWorker.DoWork += UpdateWeeklyHighlight;
-		var weeklyTimer = new Timer(30000);
-		//var weeklyTimer = new Timer(604800000);
+		var weeklyTimer = new Timer(604800000);
 		weeklyTimer.Elapsed += weeklyTimer_Elapsed;
 		weeklyTimer.Start();
 	}

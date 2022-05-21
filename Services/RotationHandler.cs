@@ -112,10 +112,10 @@ public class RotationHandler
 
 			var components = new ComponentBuilder();
 
-			if (selectedBot.InviteUrl != null) components.WithButton("Invite", null, ButtonStyle.Link, url: selectedBot.InviteUrl);
-			if (selectedBot.Link1 != null) components.WithButton("Website", null, ButtonStyle.Link, url: selectedBot.Link1);
-			if (selectedBot.Link2 != null) components.WithButton("Github", null, ButtonStyle.Link, url: selectedBot.Link2);
-			if (selectedBot.Link3 != null) components.WithButton("Support", null, ButtonStyle.Link, url: "https://discord.gg/" + selectedBot.Link3);
+			if (selectedBot.InviteUrl != "") components.WithButton("Invite", null, ButtonStyle.Link, url: selectedBot.InviteUrl);
+			if (selectedBot.Link1 != "") components.WithButton("Website", null, ButtonStyle.Link, url: selectedBot.Link1);
+			if (selectedBot.Link2 != "") components.WithButton("Github", null, ButtonStyle.Link, url: selectedBot.Link2);
+			if (selectedBot.Link3 != "") components.WithButton("Support", null, ButtonStyle.Link, url: "https://discord.gg/" + selectedBot.Link3);
 
 			await message.ModifyAsync(x =>
 			{
@@ -203,10 +203,10 @@ public class RotationHandler
 
 			var components = new ComponentBuilder();
 
-			if (selectedBot.InviteUrl != null) components.WithButton("Invite", null, ButtonStyle.Link, url: selectedBot.InviteUrl);
-			if (selectedBot.Link1 != null) components.WithButton("Website", null, ButtonStyle.Link, url: selectedBot.Link1);
-			if (selectedBot.Link2 != null) components.WithButton("Github", null, ButtonStyle.Link, url: selectedBot.Link2);
-			if (selectedBot.Link3 != null) components.WithButton("Support", null, ButtonStyle.Link, url: "https://discord.gg/" + selectedBot.Link3);
+			if (selectedBot.InviteUrl != "") components.WithButton("Invite", null, ButtonStyle.Link, url: selectedBot.InviteUrl);
+			if (selectedBot.Link1 != "") components.WithButton("Website", null, ButtonStyle.Link, url: selectedBot.Link1);
+			if (selectedBot.Link2 != "") components.WithButton("Github", null, ButtonStyle.Link, url: selectedBot.Link2);
+			if (selectedBot.Link3 != "") components.WithButton("Support", null, ButtonStyle.Link, url: "https://discord.gg/" + selectedBot.Link3);
 
 			await message.ModifyAsync(x =>
 			{

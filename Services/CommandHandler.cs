@@ -14,12 +14,14 @@ namespace DNetBotHighlight.Services
 		private readonly DiscordSocketClient _client;
 		private readonly InteractionService _commands;
 		private readonly IServiceProvider _services;
+		private readonly RotationHandler _events;
 
-		public CommandHandler(DiscordSocketClient client, InteractionService commands, IServiceProvider services)
+		public CommandHandler(DiscordSocketClient client, InteractionService commands, IServiceProvider services, RotationHandler events)
 		{
 			_client = client;
 			_commands = commands;
 			_services = services;
+			_events = events;
 		}
 
 		public async Task InitializeAsync()
@@ -35,7 +37,7 @@ namespace DNetBotHighlight.Services
 				// Process the InteractionCreated payloads to execute Interactions commands
 				//Log.Debug("[Interactions] Registering event handlers...");
 				_client.InteractionCreated += HandleInteraction;
-				//_client.MessageReceived += HandleMessage; //Only used for setup. Disable after setup.
+				_client.MessageReceived += HandleMessage; //Only used for setup. Disable after setup.
 
 				// Process the command execution results 
 				_commands.SlashCommandExecuted += SlashCommandExecuted;
@@ -97,6 +99,11 @@ namespace DNetBotHighlight.Services
 						x.Embed = null;
 						x.Components = null;
 					});
+				}
+
+				if (msg.Author.Id == 173439637388263425 && msg.Content == ">resetembeds")
+				{
+					_events.ResetEmbeds();
 				}
 			}
 			catch (Exception ex)

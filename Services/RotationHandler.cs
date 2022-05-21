@@ -36,6 +36,12 @@ public class RotationHandler
 		weeklyTimer.Elapsed += weeklyTimer_Elapsed;
 		weeklyTimer.Start();
 	}
+	
+	public void ResetEmbeds()
+	{
+		UpdateDailyHighlight(null, null);
+		UpdateWeeklyHighlight(null, null);
+	}
 
 	private void dailyTimer_Elapsed(object sender, ElapsedEventArgs e)
 	{
@@ -84,12 +90,12 @@ public class RotationHandler
 				};
 				bots.Add(bot);
 			}
-			
+
 			//Pick a random bot
 			Random rng = new Random();
 			var randomBot = rng.Next(0, bots.Count);
 			var selectedBot = bots[randomBot];
-			
+
 			//Get that specific bot
 			EmbedBuilder builder = new EmbedBuilder()
 				.WithColor(Color.Purple)
@@ -104,18 +110,18 @@ public class RotationHandler
 			var owner = _client.GetGuild(848176216011046962).GetUser(selectedBot.OwnerID);
 			if (owner != null) builder.WithAuthor(owner);
 
-			var components = new ComponentBuilder()
-				.WithButton("Invite", null, ButtonStyle.Link, url: selectedBot.InviteUrl ?? "none", disabled: selectedBot.InviteUrl == null)
-				.WithButton("Website", null, ButtonStyle.Link, url: selectedBot.Link1 ?? "none", disabled: selectedBot.Link2 == null)
-				.WithButton("Github", null, ButtonStyle.Link, url: selectedBot.Link2 ?? "none", disabled: selectedBot.Link2 == null)
-				.WithButton("Support", null, ButtonStyle.Link, url: "https://discord.gg/" + selectedBot.Link3, disabled: selectedBot.Link3 == null)
-				.Build();
+			var components = new ComponentBuilder();
+
+			if (selectedBot.InviteUrl != null) components.WithButton("Invite", null, ButtonStyle.Link, url: selectedBot.InviteUrl);
+			if (selectedBot.Link1 != null) components.WithButton("Website", null, ButtonStyle.Link, url: selectedBot.Link1);
+			if (selectedBot.Link2 != null) components.WithButton("Github", null, ButtonStyle.Link, url: selectedBot.Link2);
+			if (selectedBot.Link3 != null) components.WithButton("Support", null, ButtonStyle.Link, url: "https://discord.gg/" + selectedBot.Link3);
 
 			await message.ModifyAsync(x =>
 			{
 				x.Content = "";
 				x.Embed = builder.Build();
-				x.Components = components;
+				x.Components = components.Build();
 			});
 		}
 		catch (Exception ex)
@@ -195,18 +201,18 @@ public class RotationHandler
 			var owner = _client.GetGuild(848176216011046962).GetUser(selectedBot.OwnerID);
 			if (owner != null) builder.WithAuthor(owner);
 
-			var components = new ComponentBuilder()
-				.WithButton("Invite", null, ButtonStyle.Link, url: selectedBot.InviteUrl ?? "none", disabled: selectedBot.InviteUrl == null)
-				.WithButton("Website", null, ButtonStyle.Link, url: selectedBot.Link1 ?? "none", disabled: selectedBot.Link2 == null)
-				.WithButton("Github", null, ButtonStyle.Link, url: selectedBot.Link2 ?? "none", disabled: selectedBot.Link2 == null)
-				.WithButton("Support", null, ButtonStyle.Link, url: "https://discord.gg/" + selectedBot.Link3, disabled: selectedBot.Link3 == null)
-				.Build();
+			var components = new ComponentBuilder();
+
+			if (selectedBot.InviteUrl != null) components.WithButton("Invite", null, ButtonStyle.Link, url: selectedBot.InviteUrl);
+			if (selectedBot.Link1 != null) components.WithButton("Website", null, ButtonStyle.Link, url: selectedBot.Link1);
+			if (selectedBot.Link2 != null) components.WithButton("Github", null, ButtonStyle.Link, url: selectedBot.Link2);
+			if (selectedBot.Link3 != null) components.WithButton("Support", null, ButtonStyle.Link, url: "https://discord.gg/" + selectedBot.Link3);
 
 			await message.ModifyAsync(x =>
 			{
 				x.Content = "";
 				x.Embed = builder.Build();
-				x.Components = components;
+				x.Components = components.Build();
 			});
 		}
 		catch (Exception ex)
